@@ -1,0 +1,293 @@
+{
+  "moeda": "BRL",
+  "ultima_atualizacao": "2026-07-11",
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "Arroz Tipo 1",
+      "categoria": "Mercearia",
+      "unidade": "5 kg",
+      "preco_medio": 29.9
+    },
+    {
+      "id": 2,
+      "nome": "Feijão Carioca",
+      "categoria": "Mercearia",
+      "unidade": "1 kg",
+      "preco_medio": 8.5
+    },
+    {
+      "id": 3,
+      "nome": "Açúcar Refinado",
+      "categoria": "Mercearia",
+      "unidade": "1 kg",
+      "preco_medio": 5.2
+    },
+    {
+      "id": 4,
+      "nome": "Sal Refinado",
+      "categoria": "Mercearia",
+      "unidade": "1 kg",
+      "preco_medio": 3.2
+    },
+    {
+      "id": 5,
+      "nome": "Óleo de Soja",
+      "categoria": "Mercearia",
+      "unidade": "900 ml",
+      "preco_medio": 7.9
+    },
+    {
+      "id": 6,
+      "nome": "Macarrão Espaguete",
+      "categoria": "Mercearia",
+      "unidade": "500 g",
+      "preco_medio": 5.5
+    },
+    {
+      "id": 7,
+      "nome": "Molho de Tomate",
+      "categoria": "Mercearia",
+      "unidade": "300 g",
+      "preco_medio": 3.2
+    },
+    {
+      "id": 8,
+      "nome": "Farinha de Trigo",
+      "categoria": "Mercearia",
+      "unidade": "1 kg",
+      "preco_medio": 6.5
+    },
+    {
+      "id": 9,
+      "nome": "Café Torrado e Moído",
+      "categoria": "Bebidas",
+      "unidade": "500 g",
+      "preco_medio": 22.9
+    },
+    {
+      "id": 10,
+      "nome": "Leite Integral",
+      "categoria": "Laticínios",
+      "unidade": "1 L",
+      "preco_medio": 5.8
+    },
+    {
+      "id": 11,
+      "nome": "Manteiga",
+      "categoria": "Laticínios",
+      "unidade": "200 g",
+      "preco_medio": 12.9
+    },
+    {
+      "id": 12,
+      "nome": "Queijo Mussarela",
+      "categoria": "Laticínios",
+      "unidade": "1 kg",
+      "preco_medio": 49.9
+    },
+    {
+      "id": 13,
+      "nome": "Presunto",
+      "categoria": "Frios",
+      "unidade": "1 kg",
+      "preco_medio": 34.9
+    },
+    {
+      "id": 14,
+      "nome": "Ovos",
+      "categoria": "Laticínios",
+      "unidade": "30 unidades",
+      "preco_medio": 24.9
+    },
+    {
+      "id": 15,
+      "nome": "Peito de Frango",
+      "categoria": "Carnes",
+      "unidade": "1 kg",
+      "preco_medio": 19.9
+    },
+    {
+      "id": 16,
+      "nome": "Carne Bovina",
+      "categoria": "Carnes",
+      "unidade": "1 kg",
+      "preco_medio": 44.9
+    },
+    {
+      "id": 17,
+      "nome": "Linguiça Toscana",
+      "categoria": "Carnes",
+      "unidade": "1 kg",
+      "preco_medio": 22.9
+    },
+    {
+      "id": 18,
+      "nome": "Pão Francês",
+      "categoria": "Padaria",
+      "unidade": "1 kg",
+      "preco_medio": 18.9
+    },
+    {
+      "id": 19,
+      "nome": "Banana",
+      "categoria": "Hortifruti",
+      "unidade": "1 kg",
+      "preco_medio": 6.9
+    },
+    {
+      "id": 20,
+      "nome": "Maçã",
+      "categoria": "Hortifruti",
+      "unidade": "1 kg",
+      "preco_medio": 9.9
+    },
+    {
+      "id": 21,
+      "nome": "Laranja",
+      "categoria": "Hortifruti",
+      "unidade": "1 kg",
+      "preco_medio": 5.9
+    },
+    {
+      "id": 22,
+      "nome": "Tomate",
+      "categoria": "Hortifruti",
+      "unidade": "1 kg",
+      "preco_medio": 8.9
+    },
+    {
+      "id": 23,
+      "nome": "Batata",
+      "categoria": "Hortifruti",
+      "unidade": "1 kg",
+      "preco_medio": 7.5
+    },
+    {
+      "id": 24,
+      "nome": "Cebola",
+      "categoria": "Hortifruti",
+      "unidade": "1 kg",
+      "preco_medio": 6.9
+    },
+    {
+      "id": 25,
+      "nome": "Alface",
+      "categoria": "Hortifruti",
+      "unidade": "unidade",
+      "preco_medio": 3.9
+    },
+    {
+      "id": 26,
+      "nome": "Refrigerante",
+      "categoria": "Bebidas",
+      "unidade": "2 L",
+      "preco_medio": 9.9
+    },
+    {
+      "id": 27,
+      "nome": "Água Mineral",
+      "categoria": "Bebidas",
+      "unidade": "1,5 L",
+      "preco_medio": 3.5
+    },
+    {
+      "id": 28,
+      "nome": "Suco de Caixa",
+      "categoria": "Bebidas",
+      "unidade": "1 L",
+      "preco_medio": 8.9
+    },
+    {
+      "id": 29,
+      "nome": "Detergente",
+      "categoria": "Limpeza",
+      "unidade": "500 ml",
+      "preco_medio": 2.8
+    },
+    {
+      "id": 30,
+      "nome": "Sabão em Pó",
+      "categoria": "Limpeza",
+      "unidade": "1,6 kg",
+      "preco_medio": 23.9
+    },
+    {
+      "id": 31,
+      "nome": "Amaciante",
+      "categoria": "Limpeza",
+      "unidade": "2 L",
+      "preco_medio": 18.9
+    },
+    {
+      "id": 32,
+      "nome": "Água Sanitária",
+      "categoria": "Limpeza",
+      "unidade": "2 L",
+      "preco_medio": 8.9
+    },
+    {
+      "id": 33,
+      "nome": "Papel Higiênico",
+      "categoria": "Higiene",
+      "unidade": "12 rolos",
+      "preco_medio": 24.9
+    },
+    {
+      "id": 34,
+      "nome": "Creme Dental",
+      "categoria": "Higiene",
+      "unidade": "90 g",
+      "preco_medio": 6.9
+    },
+    {
+      "id": 35,
+      "nome": "Sabonete",
+      "categoria": "Higiene",
+      "unidade": "90 g",
+      "preco_medio": 2.9
+    },
+    {
+      "id": 36,
+      "nome": "Shampoo",
+      "categoria": "Higiene",
+      "unidade": "400 ml",
+      "preco_medio": 16.9
+    },
+    {
+      "id": 37,
+      "nome": "Condicionador",
+      "categoria": "Higiene",
+      "unidade": "400 ml",
+      "preco_medio": 17.9
+    },
+    {
+      "id": 38,
+      "nome": "Chocolate em Barra",
+      "categoria": "Doces",
+      "unidade": "90 g",
+      "preco_medio": 6.5
+    },
+    {
+      "id": 39,
+      "nome": "Biscoito Recheado",
+      "categoria": "Doces",
+      "unidade": "140 g",
+      "preco_medio": 3.9
+    },
+    {
+      "id": 40,
+      "nome": "Sorvete",
+      "categoria": "Congelados",
+      "unidade": "2 L",
+      "preco_medio": 29.9
+    },
+    {
+      "nome": "Camisinha texturizada de morango da hello kitty",
+      "categoria": "Cosmédicos",
+      "unidade": "12 g",
+      "preco_medio": 12.5,
+      "id": 41
+    }
+  ]
+}

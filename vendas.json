@@ -1,0 +1,84 @@
+[
+  {
+    "carrinho": [
+      {
+        "produto": {
+          "categoria": "Carnes",
+          "id": 17,
+          "nome": "Linguiça Toscana",
+          "preco_medio": 22.9,
+          "unidade": "1 kg"
+        },
+        "qtd": 2,
+        "subtotal": 45.8
+      }
+    ],
+    "total": 45.8,
+    "itensCount": 2,
+    "id": 1,
+    "data": "11/07/2026 14:59"
+  },
+  {
+    "carrinho": [
+      {
+        "produto": {
+          "categoria": "Cosmédicos",
+          "id": 41,
+          "nome": "Camisinha texturizada de morango da hello kitty",
+          "preco_medio": 12.5,
+          "unidade": "12 g"
+        },
+        "qtd": 3,
+        "subtotal": 37.5
+      }
+    ],
+    "total": 37.5,
+    "itensCount": 3,
+    "forma_pagamento": "Dinheiro",
+    "cpf": "CONSUMIDOR NÃO IDENTIFICADO",
+    "id": 2,
+    "data": "11/07/2026 15:28"
+  },
+  {
+    "carrinho": [
+      {
+        "produto": {
+          "categoria": "Mercearia",
+          "id": 2,
+          "nome": "Feijão Carioca",
+          "preco_medio": 8.5,
+          "unidade": "1 kg"
+        },
+        "qtd": 2,
+        "subtotal": 17
+      }
+    ],
+    "total": 17,
+    "itensCount": 2,
+    "forma_pagamento": "PIX",
+    "cpf": "54006253800",
+    "id": 3,
+    "data": "11/07/2026 15:34"
+  },
+  {
+    "carrinho": [
+      {
+        "produto": {
+          "categoria": "Cosmédicos",
+          "id": 41,
+          "nome": "Camisinha texturizada de morango da hello kitty",
+          "preco_medio": 12.5,
+          "unidade": "12 g"
+        },
+        "qtd": 1,
+        "subtotal": 12.5
+      }
+    ],
+    "total": 12.5,
+    "itensCount": 1,
+    "forma_pagamento": "Dinheiro",
+    "cpf": "CONSUMIDOR NÃO IDENTIFICADO",
+    "id": 4,
+    "data": "11/07/2026 15:34"
+  }
+]

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Premium | Estoque</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg: #030712;
+            --surface: #111827;
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #06b6d4;
+            --text: #f9fafb;
+            --text-muted: #9ca3af;
+            --border: rgba(255, 255, 255, 0.05);
+        }
+        * { box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.08), transparent 25%);
+        }
+        .sidebar {
+            width: 320px;
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--border);
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 5px 0 25px rgba(0,0,0,0.5);
+        }
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+        h1 {
+            font-size: 2.2rem;
+            margin: 0 0 10px 0;
+            background: linear-gradient(to right, #818cf8, #c084fc, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.2);
+        }
+        .stat-title { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 10px; }
+        .stat-value { font-size: 2.2rem; font-weight: 800; color: #fff; }
+        .stat-sub { font-size: 0.9rem; color: var(--accent); margin-top: 5px; }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .chart-container {
+            background: rgba(17, 24, 39, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+            height: 350px;
+        }
+        
+        .controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .search-bar {
+            background: rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 12px;
+            width: 300px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .search-bar:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2); }
+        
+        table { width: 100%; border-collapse: collapse; }
+        .table-container {
+            background: rgba(17, 24, 39, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+        th { text-align: left; padding: 16px; color: var(--text-muted); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+        td { padding: 16px; border-bottom: 1px solid rgba(255,255,255,0.02); transition: background 0.2s; }
+        tr:hover td { background: rgba(255,255,255,0.02); cursor: default; }
+        tr:last-child td { border-bottom: none; }
+        .badge { padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.2); }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div>
+            <h1>Dashboard</h1>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: -5px;">Inteligência de Estoque</p>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-title">Total de Itens</div>
+            <div class="stat-value" id="totalItems">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-title">Preço Médio</div>
+            <div class="stat-value" id="avgPrice">R$ 0,00</div>
+        </div>
+        <div class="stat-card" style="border-color: rgba(6, 182, 212, 0.3);">
+            <div class="stat-title">Produto Mais Caro</div>
+            <div class="stat-value" id="maxProduct" style="font-size: 1.4rem; color: var(--accent);">Carregando...</div>
+            <div class="stat-sub" id="maxPrice">R$ 0,00</div>
+        </div>
+        <div class="stat-card" style="border-color: rgba(168, 85, 247, 0.3);">
+            <div class="stat-title">Produto Mais Barato</div>
+            <div class="stat-value" id="minProduct" style="font-size: 1.4rem; color: var(--secondary);">Carregando...</div>
+            <div class="stat-sub" id="minPrice">R$ 0,00</div>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <div class="dashboard-grid">
+            <div class="chart-container">
+                <canvas id="categoryChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="table-container">
+            <div class="controls">
+                <h2 style="margin: 0; font-size: 1.2rem; font-weight: 600;">Inventário</h2>
+                <input type="text" class="search-bar" id="searchInput" placeholder="Pesquisar produto ou categoria...">
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Produto</th>
+                        <th>Categoria</th>
+                        <th>Preço Médio</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const produtos = [{"id": 1, "nome": "Arroz Tipo 1", "categoria": "Mercearia", "unidade": "5 kg", "preco_medio": 29.9}, {"id": 2, "nome": "Feijão Carioca", "categoria": "Mercearia", "unidade": "1 kg", "preco_medio": 8.5}, {"id": 3, "nome": "Açúcar Refinado", "categoria": "Mercearia", "unidade": "1 kg", "preco_medio": 5.2}, {"id": 4, "nome": "Sal Refinado", "categoria": "Mercearia", "unidade": "1 kg", "preco_medio": 3.2}, {"id": 5, "nome": "Óleo de Soja", "categoria": "Mercearia", "unidade": "900 ml", "preco_medio": 7.9}, {"id": 6, "nome": "Macarrão Espaguete", "categoria": "Mercearia", "unidade": "500 g", "preco_medio": 5.5}, {"id": 7, "nome": "Molho de Tomate", "categoria": "Mercearia", "unidade": "300 g", "preco_medio": 3.2}, {"id": 8, "nome": "Farinha de Trigo", "categoria": "Mercearia", "unidade": "1 kg", "preco_medio": 6.5}, {"id": 9, "nome": "Café Torrado e Moído", "categoria": "Bebidas", "unidade": "500 g", "preco_medio": 22.9}, {"id": 10, "nome": "Leite Integral", "categoria": "Laticínios", "unidade": "1 L", "preco_medio": 5.8}, {"id": 11, "nome": "Manteiga", "categoria": "Laticínios", "unidade": "200 g", "preco_medio": 12.9}, {"id": 12, "nome": "Queijo Mussarela", "categoria": "Laticínios", "unidade": "1 kg", "preco_medio": 49.9}, {"id": 13, "nome": "Presunto", "categoria": "Frios", "unidade": "1 kg", "preco_medio": 34.9}, {"id": 14, "nome": "Ovos", "categoria": "Laticínios", "unidade": "30 unidades", "preco_medio": 24.9}, {"id": 15, "nome": "Peito de Frango", "categoria": "Carnes", "unidade": "1 kg", "preco_medio": 19.9}, {"id": 16, "nome": "Carne Bovina", "categoria": "Carnes", "unidade": "1 kg", "preco_medio": 44.9}, {"id": 17, "nome": "Linguiça Toscana", "categoria": "Carnes", "unidade": "1 kg", "preco_medio": 22.9}, {"id": 18, "nome": "Pão Francês", "categoria": "Padaria", "unidade": "1 kg", "preco_medio": 18.9}, {"id": 19, "nome": "Banana", "categoria": "Hortifruti", "unidade": "1 kg", "preco_medio": 6.9}, {"id": 20, "nome": "Maçã", "categoria": "Hortifruti", "unidade": "1 kg", "preco_medio": 9.9}, {"id": 21, "nome": "Laranja", "categoria": "Hortifruti", "unidade": "1 kg", "preco_medio": 5.9}, {"id": 22, "nome": "Tomate", "categoria": "Hortifruti", "unidade": "1 kg", "preco_medio": 8.9}, {"id": 23, "nome": "Batata", "categoria": "Hortifruti", "unidade": "1 kg", "preco_medio": 7.5}, {"id": 24, "nome": "Cebola", "categoria": "Hortifruti", "unidade": "1 kg", "preco_medio": 6.9}, {"id": 25, "nome": "Alface", "categoria": "Hortifruti", "unidade": "unidade", "preco_medio": 3.9}, {"id": 26, "nome": "Refrigerante", "categoria": "Bebidas", "unidade": "2 L", "preco_medio": 9.9}, {"id": 27, "nome": "Água Mineral", "categoria": "Bebidas", "unidade": "1,5 L", "preco_medio": 3.5}, {"id": 28, "nome": "Suco de Caixa", "categoria": "Bebidas", "unidade": "1 L", "preco_medio": 8.9}, {"id": 29, "nome": "Detergente", "categoria": "Limpeza", "unidade": "500 ml", "preco_medio": 2.8}, {"id": 30, "nome": "Sabão em Pó", "categoria": "Limpeza", "unidade": "1,6 kg", "preco_medio": 23.9}, {"id": 31, "nome": "Amaciante", "categoria": "Limpeza", "unidade": "2 L", "preco_medio": 18.9}, {"id": 32, "nome": "Água Sanitária", "categoria": "Limpeza", "unidade": "2 L", "preco_medio": 8.9}, {"id": 33, "nome": "Papel Higiênico", "categoria": "Higiene", "unidade": "12 rolos", "preco_medio": 24.9}, {"id": 34, "nome": "Creme Dental", "categoria": "Higiene", "unidade": "90 g", "preco_medio": 6.9}, {"id": 35, "nome": "Sabonete", "categoria": "Higiene", "unidade": "90 g", "preco_medio": 2.9}, {"id": 36, "nome": "Shampoo", "categoria": "Higiene", "unidade": "400 ml", "preco_medio": 16.9}, {"id": 37, "nome": "Condicionador", "categoria": "Higiene", "unidade": "400 ml", "preco_medio": 17.9}, {"id": 38, "nome": "Chocolate em Barra", "categoria": "Doces", "unidade": "90 g", "preco_medio": 6.5}, {"id": 39, "nome": "Biscoito Recheado", "categoria": "Doces", "unidade": "140 g", "preco_medio": 3.9}, {"id": 40, "nome": "Sorvete", "categoria": "Congelados", "unidade": "2 L", "preco_medio": 29.9}];
+        
+        // Atualizar Estatísticas
+        document.getElementById('totalItems').innerText = produtos.length;
+        const total = produtos.reduce((acc, p) => acc + p.preco_medio, 0);
+        document.getElementById('avgPrice').innerText = 'R$ ' + (total / produtos.length).toFixed(2).replace('.', ',');
+        
+        const maxP = produtos.reduce((prev, current) => (prev.preco_medio > current.preco_medio) ? prev : current);
+        document.getElementById('maxProduct').innerText = maxP.nome;
+        document.getElementById('maxPrice').innerText = 'R$ ' + maxP.preco_medio.toFixed(2).replace('.', ',');
+
+        const minP = produtos.reduce((prev, current) => (prev.preco_medio < current.preco_medio) ? prev : current);
+        document.getElementById('minProduct').innerText = minP.nome;
+        document.getElementById('minPrice').innerText = 'R$ ' + minP.preco_medio.toFixed(2).replace('.', ',');
+
+        // Tabela e Filtro
+        const tableBody = document.getElementById('tableBody');
+        const searchInput = document.getElementById('searchInput');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            // Ordenar por nome
+            data.sort((a, b) => a.nome.localeCompare(b.nome));
+            data.forEach(p => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="color: var(--text-muted);">#${p.id}</td>
+                    <td>
+                        <div style="font-weight: 600; font-size: 1.05rem;">${p.nome}</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">${p.unidade}</div>
+                    </td>
+                    <td><span class="badge">${p.categoria}</span></td>
+                    <td style="color: #10b981; font-weight: 600; font-size: 1.05rem;">R$ ${p.preco_medio.toFixed(2).replace('.', ',')}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        renderTable(produtos);
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = produtos.filter(p => 
+                p.nome.toLowerCase().includes(term) || 
+                p.categoria.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        // Gráfico (Chart.js)
+        const ctx = document.getElementById('categoryChart').getContext('2d');
+        
+        const categorias = {};
+        produtos.forEach(p => {
+            categorias[p.categoria] = (categorias[p.categoria] || 0) + 1;
+        });
+
+        // Gradiente para o gráfico
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(99, 102, 241, 0.8)');
+        gradient.addColorStop(1, 'rgba(168, 85, 247, 0.1)');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(categorias),
+                datasets: [{
+                    label: 'Quantidade de Produtos',
+                    data: Object.values(categorias),
+                    backgroundColor: gradient,
+                    borderRadius: 8,
+                    borderWidth: 1,
+                    borderColor: 'rgba(99, 102, 241, 0.5)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'Distribuição de Produtos por Categoria',
+                        color: '#f9fafb',
+                        font: { family: 'Outfit', size: 18, weight: 600 },
+                        padding: 20
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(17, 24, 39, 0.9)',
+                        titleFont: { family: 'Outfit', size: 14 },
+                        bodyFont: { family: 'Outfit', size: 14 },
+                        padding: 12,
+                        cornerRadius: 8,
+                        displayColors: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255,255,255,0.05)' },
+                        ticks: { color: '#9ca3af', font: { family: 'Outfit' } }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#9ca3af', font: { family: 'Outfit' } }
+                    }
+                },
+                animation: {
+                    duration: 2000,
+                    easing: 'easeOutQuart'
+                }
+            }
+        });
+    </script>
+</body>
+</html>

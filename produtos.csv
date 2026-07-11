@@ -1,0 +1,41 @@
+ID;Nome;Categoria;Unidade;Preco_Medio
+1;Arroz Tipo 1;Mercearia;5 kg;29,90
+2;Feijão Carioca;Mercearia;1 kg;8,50
+3;Açúcar Refinado;Mercearia;1 kg;5,20
+4;Sal Refinado;Mercearia;1 kg;3,20
+5;Óleo de Soja;Mercearia;900 ml;7,90
+6;Macarrão Espaguete;Mercearia;500 g;5,50
+7;Molho de Tomate;Mercearia;300 g;3,20
+8;Farinha de Trigo;Mercearia;1 kg;6,50
+9;Café Torrado e Moído;Bebidas;500 g;22,90
+10;Leite Integral;Laticínios;1 L;5,80
+11;Manteiga;Laticínios;200 g;12,90
+12;Queijo Mussarela;Laticínios;1 kg;49,90
+13;Presunto;Frios;1 kg;34,90
+14;Ovos;Laticínios;30 unidades;24,90
+15;Peito de Frango;Carnes;1 kg;19,90
+16;Carne Bovina;Carnes;1 kg;44,90
+17;Linguiça Toscana;Carnes;1 kg;22,90
+18;Pão Francês;Padaria;1 kg;18,90
+19;Banana;Hortifruti;1 kg;6,90
+20;Maçã;Hortifruti;1 kg;9,90
+21;Laranja;Hortifruti;1 kg;5,90
+22;Tomate;Hortifruti;1 kg;8,90
+23;Batata;Hortifruti;1 kg;7,50
+24;Cebola;Hortifruti;1 kg;6,90
+25;Alface;Hortifruti;unidade;3,90
+26;Refrigerante;Bebidas;2 L;9,90
+27;Água Mineral;Bebidas;1,5 L;3,50
+28;Suco de Caixa;Bebidas;1 L;8,90
+29;Detergente;Limpeza;500 ml;2,80
+30;Sabão em Pó;Limpeza;1,6 kg;23,90
+31;Amaciante;Limpeza;2 L;18,90
+32;Água Sanitária;Limpeza;2 L;8,90
+33;Papel Higiênico;Higiene;12 rolos;24,90
+34;Creme Dental;Higiene;90 g;6,90
+35;Sabonete;Higiene;90 g;2,90
+36;Shampoo;Higiene;400 ml;16,90
+37;Condicionador;Higiene;400 ml;17,90
+38;Chocolate em Barra;Doces;90 g;6,50
+39;Biscoito Recheado;Doces;140 g;3,90
+40;Sorvete;Congelados;2 L;29,90
